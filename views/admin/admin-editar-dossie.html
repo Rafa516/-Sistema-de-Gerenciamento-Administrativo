@@ -1,0 +1,137 @@
+<div class="content">
+
+    <div class="content-inside">
+  
+      <div class="my-4">
+        <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+          <li class="nav-item">
+            <a style="background-color: #2E9AFE;color: white" class="nav-link active" id="home-tab" data-toggle="tab"
+              role="tab" aria-controls="home" aria-selected="false"><b>Alterar Dossiê </b></a>
+          </li>
+        </ul>
+        {if="$CallOpenMsg != ''"}
+        <div class="alert alert-success">
+          <b>{$CallOpenMsg}</b>
+        </div>
+        {/if}
+  
+        {if="$errorRegister != ''"}
+        <div class="alert alert-danger">
+          <b>{$errorRegister}</b>
+        </div>
+        {/if}
+  
+  
+  
+        <div class="container-fluid px-1 py-5 mx-auto">
+          <div class="row d-flex justify-content-center">
+            <div class="col-xl-12 col-lg-8 col-md-9 col-11 text-center">
+  
+              <form class="form-group" action="/admin/dossie/editar/{$value.id_dossie}" method="post"
+                enctype="multipart/form-data">
+  
+                <input class="form-control py-1" value="{$value.id_dossie}" name="id_dossie" type="hidden">
+                <input class="form-control py-1" value="{$usuario.id_usuario}" name="id_usuario" type="hidden">
+  
+            </div>
+          </div>
+  
+          <b>Identificação do Servidor</b><br><br>
+  
+          <div class="table-responsive">
+            <table class="table table-hover table-bordered">
+              <thead class="table table-dark">
+  
+  
+                <th>
+                  <center>Nome - Matrícula - CPF<b>
+                </th>
+  
+                <th>
+                  <center>Ano de Referência<b>
+                </th>
+  
+                <th>
+                  <center>Regime<b>
+                </th>
+  
+                </tr>
+              </thead>
+              <tbody>
+  
+                <tr>
+  
+                  <td>
+                    <center>
+                      <select class="temporarios" id="" name="id_temporario" required>
+                        <option value="{$value.id_temporario}">{$value.nome} - {$value.matricula} - {$value.cpf}</option>
+                        {loop="$temporarios"}
+                        <option value="{$value.id_temporario}">{$value.nome} - {$value.matricula} - {$value.cpf}
+                        </option>
+                        {/loop}
+                      </select>
+                    </center>
+  
+                  </td>
+                  <td>
+                    <select class="form-control py-1" id="ano_arquivo" name="ano_arquivo" required>
+                      <option value="{$value.ano_arquivo}">{$value.ano_arquivo}</option>
+                      <option value="2023">2023</option>
+                      <option value="2024">2024</option>
+                      <option value="2025">2025</option>
+                      <option value="2026">2026</option>
+                    </select>
+                  </td>
+  
+                  <td>
+                    <select class="form-control py-1" name="regime" id="regime">
+                      <option value="{$value.regime}">{$value.regime}</option>
+                      <option value="Contrato Temporário">Contrato Temporário</option>
+                      <option value="Efetivos">Efetivos</option>
+                    </select>
+                  </td>
+  
+                </tr>
+  
+              </tbody>
+  
+            </table>
+          </div>
+  
+          <center><input style="width: 100%;" class="btn btn-success btn " type="submit" value="Alterar"></center>
+          </form>
+          <br><i>Última alteração registrada pelo(a) usuário(a)<b> {$value.nome_user}</b> em <b>{function="formatDateHoras($value.dt_registro_dossie)"}.</b></i>
+        </div>
+        
+      </div>
+  
+      <hr class="my-4" />
+  
+  
+      <a href="/admin/todos-dossiers-temporarios" class="btn btn-info btn-xs"><i class="fas fa-chevron-circle-left"></i><b>
+          Voltar</b></a>
+  
+    </div>
+  
+  </div>
+  </div>
+  
+  </div>
+  
+  
+  </div>
+  </div>
+  
+  <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  
+  
+  <script type="text/javascript">
+  
+  
+    $(".temporarios").select2({
+  
+    });
+  
+  </script>

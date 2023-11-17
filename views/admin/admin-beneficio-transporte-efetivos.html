@@ -1,0 +1,394 @@
+<div class="content">
+  <div class="content-inside">
+    <div class="my-4">
+      <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+        <li class="nav-item">
+          <a style="background-color: #2E9AFE;color: white" class="nav-link active" id="home-tab" data-toggle="tab"
+            role="tab" aria-controls="home" aria-selected="false"><b>Auxílio Transporte Efetivos -
+              {if="$total == 0"}
+              Nenhum Registrado
+              {elseif="$total == 1"}
+              {$total} Registrado
+              {else}
+              {$total} Registrados
+              {/if}</b></a>
+
+        </li>
+
+      </ul>
+
+
+
+      <a data-toggle="modal" data-target="#modalCalcularRepag" style="width: 20%;" href="/admin/registrar-beneficios"
+        class="btn btn-primary btn-sm"><i class="fa fa-plus-circle" aria-hidden="true"></i><b> Cadastrar
+          Benefício</b></a>
+
+        <a href="/admin/beneficio/transporte-vigilantes" class="btn btn-info btn-sm"><i class="fas fa-user-shield"></i><b> Transporte Vigilantes</b></a>
+
+         <button class="btn btn-success  btn-sm" onclick="tableToExcel('Transporte_Efetivos.xls', '#tblExport')">
+            <i class="fas fa-file-excel"></i><b> Exportar Excel</b></button>
+          <a id="link-to-download" style="display: none;"></a>
+         
+    <!--   <a href="/admin/beneficio/alimentacao" class="btn btn-info btn-sm"><i class="fas fa-bread-slice"></i><b> Auxílio
+          Alimentação</b></a>
+ -->
+      {if="$total > 0"}
+      <div class="search" style="float: right">
+        <form action="/admin/beneficio/transporte-efetivos" method="get">
+          <div class="input-group">
+            <input type="text" name="search" class="form-control" placeholder="Digite sua pesquisa...">
+            <span class="input-group-btn">
+              <button class="btn btn" style="background-color: #2E9AFE;color: white" type="submit" id="search-btn"><i
+                  class="fa fa-search" style="font-size:13px;"> PESQUISAR</i>
+              </button>
+            </span>
+          </div>
+        </form>
+      </div><br><br>
+
+      {if="$profileMsg != ''"}
+      <div class="alert alert-success">
+        <b>{$profileMsg}</b>
+      </div>
+      {/if}
+
+
+      <div id="tblExport" class="table-responsive">
+        <table class=" table table-hover table-sm  table-bordered">
+          <thead class="table table-dark">
+            <tr style="font-size: 16px; font-weight: bold; ">
+
+
+
+
+
+              <th>
+                <center>Nome
+              </th>
+
+              <th>
+                <center>Matrícula
+              </th>
+              <th>
+                <center>Unidade
+              </th>
+              <th>
+                <center>Carreira
+              </th>
+              <th>
+                <center>Folha
+              </th>
+              <th>
+                <center>Situação
+              </th>
+               <th class="remover">
+                <center >Visualizar
+              </th>
+              <th class="remover">
+                <center>Excluir
+              </th>
+
+
+            </tr>
+          </thead>
+          <tbody>
+            {loop="$beneficios"}
+            <tr style="font-size: 15px;font-weight: normal;">
+
+              <td>
+                <center>{$value.nome_servidor}
+              </td>
+              <td>
+                <center>{$value.matricula}
+              </td>
+              <td>
+                <center>{$value.sigla}
+              </td>
+              <td>
+                <center>{$value.carreira}
+              </td>
+
+              <td>
+                <center>{$value.mes}/{$value.ano}
+              </td>
+
+              <td>
+                {if="$value.situacao == 'Incluído no Sistema'"}
+                <b style="color: green;">
+                  <center>{$value.situacao}
+                </b>
+                {elseif="$value.situacao == 'Incluído no Sistema e REPAG Efetuado'"}
+                <b style="color: green;"><center>{$value.situacao}</b>
+                {elseif="$value.situacao == 'Falta Incluir no Sistema'"}
+                <b style="color: red;">
+                  <center>{$value.situacao}
+                </b>
+                {elseif="$value.situacao == 'Ajustar Benefício'"}
+                <b style="color: orange;">
+                  <center>{$value.situacao}
+                </b>
+
+                {elseif="$value.situacao == 'Incluído no Sistema e Solicitar REPAG'"}
+                <b style="color: orange;"><center>{$value.situacao}</b>
+                {else}
+                <b style="color: blue;">
+                  <center>{$value.situacao}
+                </b>
+                {/if}
+
+              </td>
+
+
+              <td>
+                <center> <a href="/admin/transporte-efetivo-visualizar/{$value.id_beneficio_efetivo}"
+                    class="btn btn-primary btn-sm"><i class="fas fa-eye" aria-hidden="true"></i><b></b></a>
+              </td>
+
+              <td>
+                <center>
+                  <button
+                    onclick="deletar('{$value.id_beneficio_efetivo}','{$value.nome_servidor}','/admin/beneficio-transporte-vigilantes/delete/{$value.id_beneficio_efetivo},{$usuario.nome_user}','Excluir Transporte')"
+                    class="btn btn-danger btn-sm">
+                    <i class="fas fa-trash-alt"></i>
+                    <b></b></button>
+              </td>
+
+
+            </tr>
+
+            {/loop}
+
+          </tbody>
+
+        </table><br>
+
+      </div>
+
+
+
+      <center>
+        <div class="box-footer clearfix">
+          <ul class="pagination">
+            {loop="$pages"}
+            {if="$pages == $value.link"}
+            <li> <a class="active" href="{$value.link}">{$value.page}</a></li>
+            {else}
+            <li><a href="{$value.link}">{$value.page}</a></li>
+            {/if}
+            {/loop}
+        </div>
+      </center>
+
+      {/if}
+
+
+      <br><br><a href="javascript:history.back()" class="btn btn-info btn-xs"><i
+          class="fas fa-chevron-circle-left"></i><b>
+          Voltar</b></a>
+
+
+      <hr class="my-4" />
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<!-- MODAL CALCULAR REPAG -->
+<div class="modal fade" id="modalCalcularRepag" tabindex="-1" role="dialog" aria-labelledby="modalCalcularRepagTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Cadastrar Auxílio Transporte</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="form-group" name="form_repag" action="/admin/registrar-transporte-efetivo/enviar" method="post">
+
+          <input type="hidden" name="beneficio" value="Auxílio Transporte">
+          <input  value="{$usuario.id_usuario}" name="id_usuario" type="hidden">
+
+          <label>Servidor - Matrícula - Carreira - Unidade</label>
+          <select class="form-control py-1" name="id_efetivo" required  style="width: 75%;display: inline-block">
+            <option value="">
+              {loop="$efetivos"}
+            <option value="{$value.id_efetivo}">{$value.nome_servidor} - {$value.matricula} - {$value.carreira} -
+              {$value.sigla} </option>
+            {/loop}
+          </select>
+
+          <button style="margin-left:3%;" type="button" class="btn btn-primary" data-toggle="modal"
+              data-target="#modalEfetivos" id="buttonsUtilidade"><b>
+                <i class="fa fa-user"></i> Cadastrar Efetivo</b>
+            </button><br>
+
+          <label>Localidade</label> <select class="form-control py-1"  name="id_itinerarios" required>
+            <option value="" ></option>
+            {loop="$itinerarios"}
+            <option value="{$value.id_itinerarios}">{$value.nome_itinerario} 
+            </option>
+
+            {/loop}
+          </select>
+
+          <label>Mês</label> <select class="form-control py-1" id="mes" name="mes" required>
+            <option value=""></option>
+            <option value="01 - Janeiro">01 - Janeiro</option>
+            <option value="02 - Fevereiro">02 - Fevereiro</option>
+            <option value="03 - Março">03 - Março</option>
+            <option value="04 - Abril">04 - Abril</option>
+            <option value="05 - Maio">05 - Maio</option>
+            <option value="06 - Junho">06 - Junho</option>
+            <option value="07 - Julho">07 - Julho</option>
+            <option value="08 - Agosto">08 - Agosto</option>
+            <option value="09 - Setembro">09 - Setembro</option>
+            <option value="10 - Outubro">10 - Outubro</option>
+            <option value="11 - Novembro">11 - Novembro</option>
+            <option value="12 - Dezembro">12 - Dezembro</option>
+
+          </select>
+
+          <label>Ano</label> <select class="form-control py-1"  name="ano" required>
+            <option value=""></option>
+            <option value="2023">2023</option>
+            <option value="2024">2024</option>
+            <option value="2025">2025</option>
+            <option value="2026">2026</option>
+            <option value="2026">2027</option>
+          </select>
+
+          <label>Processo SEI</label><input name="processo" type="text"
+          class="form-control py-1" >
+
+          <label>Data Processo</label><input name="data_processo" type="date"
+          class="form-control py-1" >
+
+          <label>Situação</label> <select class="form-control py-1" id="situacao" name="situacao" required>
+            <option value=""></option>
+            <option value="Incluído no Sistema e Solicitar REPAG">Incluído no Sistema e Solicitar REPAG</option>
+            <option value="Incluído no Sistema">Incluído no Sistema</option>
+            <option value="Falta Incluir no Sistema">Falta Incluir no Sistema</option>
+            <option value="Ajustar Benefício">Ajustar Benefício</option>
+          </select>
+
+          <label>Referência</label> <select class="form-control py-1" id="referencia" name="referencia" required>
+            <option value=""></option>
+             <option value="Efetivos">Efetivos</option>
+            <option value="Vigilantes">Vigilantes</option>
+          </select>
+
+        
+
+
+          
+          
+
+
+
+      </div>
+      <div class="modal-footer">
+        <input class="btn btn-primary" type="submit" value="Cadastrar">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Voltar</button>
+
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL CADASTRAR NOVO SERVIDOR EFETIVO -->
+<div class="modal fade" id="modalEfetivos" tabindex="-1" role="dialog" aria-labelledby="modalEfetivosTitle"
+  aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Cadastrar Servidor Efetivo</h5>
+        <button onclick="atualizar()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <form class="form-group" action="/admin/registrar-efetivos-modal/enviar" method="post">
+
+
+
+          <div class="form-group"><label class="small mb-1"><b>Nome</b></label>
+            <input class="form-control py-1" type="text" name="nome_servidor" required />
+          </div>
+
+          <div class="form-group"><label class="small mb-1"><b>Matrícula</b></label>
+            <input class="form-control py-1" type="text" name="matricula" />
+          </div>
+
+          <div class="form-group"><label class="small mb-1"><b>Carreira</b></label>
+            <select class="form-control py-1" name="carreira">
+                  <option value=""></option>
+                  <option value="Magistério">Magistério</option>
+                  <option value="Assistência">Assistência</option>
+            </select>
+          </div>
+
+          <div class="form-group"><label class="small mb-1"><b>Unidade</b></label>
+            <select class="form-control py-1" id="" name="id_unidade" required>
+            <option value=""></option>
+            {loop="$unidades"}
+            <option value="{$value.id_unidade}">{$value.sigla} - {$value.nome} 
+            </option>
+            {/loop}
+            </select>
+          </div>
+
+
+          <input class="btn btn-primary btn btn-block" type="submit" value="Enviar">
+        </form>
+
+
+        <div class="modal-footer">
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+
+<script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+  crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+  
+const tableToExcel = (nome, table) => {
+    let mimetype = 'application/vnd.ms-excel';
+    let link = document.querySelector('#link-to-download');
+    let tabela = document.querySelector(table);
+    let clone = tabela.cloneNode(true);
+    let remover = clone.querySelectorAll('.remover');
+
+    remover.forEach((td) => {
+        if (td.parentElement) {
+            td.parentElement.removeChild(td);
+        }
+    });
+
+    
+    link.href = window.URL.createObjectURL(new Blob(['\ufeff'+clone.outerHTML], {
+        type: mimetype
+    }));
+    link.download = nome;
+    link.click();
+};
+
+</script>

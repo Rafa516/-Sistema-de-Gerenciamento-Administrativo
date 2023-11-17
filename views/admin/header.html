@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema ADM</title>
+  <link href="/../res/admin/img/icon.png" rel="icon">
+  <!--style-->
+  <link rel="stylesheet" href="/../res/admin/css/style.css">
+  <!--font-awesome-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+
+  <!--bootstrap-->
+  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+
+  <!--magnific-popup-->
+  <link rel="stylesheet" href="/../res/admin/css/magnific-popup.css">
+  <!-- <link rel="stylesheet" href="magnific-popup/magnific-popup.css"> -->
+
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
+ 
+
+</head>
+
+<body>
+
+  <input type="checkbox" id="check">
+  <!--header area start-->
+  <header>
+    <label for="check">
+      <i style="margin-left: -280px;" class="fas fa-bars" id="sidebar_btn"></i>
+
+    </label>
+    <div class="left_area">
+
+      <center>
+        <h3> Sistema - ADM</h3>
+        <center>
+
+    </div>
+    <div class="right_area">
+      <a href="/admin/logout" class="logout_btn">Sair</a>
+    </div>
+  </header>
+  <!--header area end-->
+
+  <!--mobile navigation bar start-->
+  <div class="mobile_nav">
+    <div class="nav_bar">
+
+      {if="$usuario.foto == 0"}
+      <img src="/res/ft_perfil/ft_male.png" class="mobile_profile_image" alt="">
+      {else}
+      <img src="/res/ft_perfil/{$usuario.foto}" class="mobile_profile_image" alt="">
+      {/if}
+
+      <b style="font-size: 17px;color: white;">{function="getUsuarioNome()"}</b>
+      <i class="fa fa-bars nav_btn"></i>
+    </div>
+      <div class="mobile_nav_items">
+        <a href="/admin"><i class="fas fa-home"></i><span>Home</span></a>
+
+        <a href="/admin/painel"><i class="fas fa-chart-bar"></i><span>Estatísticas</span></a>
+
+        <a href="/admin/informacoes"><i class="fas fa-chart-bar"></i><span>Informações</span></a>
+
+        <a href="/admin/unidades/localidades"><i class="fas fa-chart-bar"></i><span>Unidades Escolares</span></a>
+        
+
+      <a href="/admin/utilidades"><i class="fas fa-clipboard-list"></i><span>
+        Utilidades</span></a>
+
+        <a href="/admin/historico"><i class="fa fa-clock-o"></i><span>
+          Histórico Exclusão</span></a>
+
+      <a href="/admin/perfil"><i class="fas fa-info-circle"></i><span>Perfil</span></a>
+    </div>
+  </div>
+  <!--mobile navigation bar end-->
+
+ <!--sidebar start-->
+ <div class="sidebar">
+  <div class="profile_info">
+
+   {if="$usuario.foto == 0"}
+    <img src="/res/ft_perfil/ft_male.png" class="profile_image" alt="">
+  {else}
+    <img src="/res/ft_perfil/{$usuario.foto}" class="profile_image" alt="">
+  {/if}
+    <h5 style="font-size: 18px;color: white;">{function="getUsuarioNome()"}</h5>
+  </div>
+   <a href="/admin"><i class="fas fa-home"></i><span>Home</span></a>
+
+   <a href="/admin/usuarios"><i class="fas fa-users"></i><span>Usuários</span></a>
+   <a href="/admin/painel"><i class="fas fa-chart-bar"></i><span>Estatísticas</span></a> 
+  
+  <a href="/admin/informacoes"><i class="fas fa-info-circle"></i><span>Informações</span></a>
+
+    <a href="/admin/unidades/localidades"><i class="fas fa-graduation-cap"></i><span>Unidades Escolares</span></a>
+  
+    <a href="/admin/utilidades"><i class="fas fa-clipboard-list"></i><span>Utilidades</span></a>
+
+    <a href="/admin/historico"><i class="fa fa-clock"></i><span>Histórico Exclusão</span></a>
+
+    <!-- <a href="/usuario/todos-itinerarios"><i class="fas fa-bus"></i><span>Itinerários</span></a>
+
+
+   <a href="/usuario/linhas"><i class="fas fa-map-marker-alt"></i><span>Linhas</span></a>  -->
+
+    
+  <!-- <a href="/usuario/todos-documentos"><i class="fas fa-file" ></i><span>Documentos </span></a> -->
+  
+     
+
+  <a href="/admin/perfil"><i class="fas fa-user"></i><span>Perfil</span></a>
+</div>
+<!--sidebar end-->

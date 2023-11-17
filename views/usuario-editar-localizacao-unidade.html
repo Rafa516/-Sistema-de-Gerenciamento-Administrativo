@@ -1,0 +1,130 @@
+
+
+
+<div class="content">
+
+    <div class="content-inside">
+
+        <div class="my-4">
+            <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a style="background-color: #2E9AFE;color: white" class="nav-link active" id="home-tab"
+                        data-toggle="tab" role="tab" aria-controls="home" aria-selected="false"><b>Alterar localização - {$values.nome}</b></a>
+                </li>
+            </ul>
+          
+
+            {if="$errorRegister != ''"}
+            <div class="alert alert-danger">
+                <b>{$errorRegister}</b>
+            </div>
+            {/if}
+
+            <div class="row mt-5 align-items-center">
+              
+                  
+            <div id="map" style="z-index: 0;"></div>
+                   
+            <form class="form-group" action="/usuario/localizacao-alterar/post/{$values.id_unidade}" method="post">
+                <input  value="{$values.id_localidade}" name="id_localidade"
+                                    type="hidden">
+                <input class="form-control py-1" value="{$usuario.id_usuario}" name="id_usuario"
+                                    type="hidden">
+
+
+                <input  id="lat"  type="hidden" name="lat">
+
+
+                <input id="lng"  type="hidden" name="lng">
+
+
+ 
+            </div>
+            <br><input style="width: 100%;" class="btn btn-success btn " type="submit"
+                                        value="Alterar"></center>
+
+            </div>
+            <hr class="my-4" />
+            </form>
+            <a href="/usuario/unidade/localizacao/{$values.id_unidade}" class="btn btn-info btn-xs"><i class="fas fa-chevron-circle-left"></i><b>
+                Voltar</b></a>
+        </div>
+        
+    </div>
+    
+</div>
+</div>
+</div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+
+
+{if="$values.unidade == 'Unidade Escolar'"}
+<script>
+    var tileLayer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '&copy; ... SS - DF'
+  });
+  
+  var map = new L.Map('map', {
+    'center': [{$values.lat},{$values.lng}],
+    'zoom': 18,
+    'layers': [tileLayer]
+  });
+  
+    var muxiIconProperties = {
+        iconUrl: "/res/map/unidade.png"
+      , iconSize: [44, 59]
+      };
+  
+      var muxiIcon = L.icon(muxiIconProperties);
+  
+  var marker = L.marker([{$values.lat},{$values.lng}],{
+    draggable: true,
+    icon: muxiIcon
+  }).addTo(map);
+  
+  marker.on('dragend', function (e) {
+    document.getElementById('lat').value = marker.getLatLng().lat;
+    document.getElementById('lng').value = marker.getLatLng().lng;
+  });
+  </script>
+
+  {else}
+  <script>
+    var tileLayer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '&copy; ... SS - DF'
+  });
+  
+  var map = new L.Map('map', {
+    'center': [{$values.lat},{$values.lng}],
+    'zoom': 18,
+    'layers': [tileLayer]
+  });
+  
+    var muxiIconProperties = {
+        iconUrl: "/res/map/cre.png"
+      , iconSize: [44, 59]
+      };
+  
+      var muxiIcon = L.icon(muxiIconProperties);
+  
+  var marker = L.marker([{$values.lat},{$values.lng}],{
+    draggable: true,
+    icon: muxiIcon
+  }).addTo(map);
+  
+  marker.on('dragend', function (e) {
+    document.getElementById('lat').value = marker.getLatLng().lat;
+    document.getElementById('lng').value = marker.getLatLng().lng;
+  });
+  </script>
+  {/if}
+
+
+
+
+
+
+

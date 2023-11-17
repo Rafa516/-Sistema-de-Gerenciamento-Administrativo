@@ -1,0 +1,149 @@
+<div class="content">
+    <div class="content-inside">
+      <div class="my-4">
+        <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+          <li class="nav-item">
+            <a style="background-color: #2E9AFE;;color: white" class="nav-link active" id="home-tab" data-toggle="tab"
+              role="tab" aria-controls="home" aria-selected="false"><b>Arquivo(s) do Dossiê <b>{$value.nome}</b>
+              </b></a>
+  
+          </li>
+        </ul>
+  
+        {if="$profileMsg != ''"}
+        <div class="alert alert-success">
+          <b>{$profileMsg}</b>
+        </div>
+        {/if}
+  
+        <button data-toggle="modal" data-target="#arquivoModal" class="btn btn-warning btn-sm"><i
+            class="far fa-file-alt"></i><b> Anexar Arquivo</b></button>
+  
+        {if="numArquivosDossiers($value.id_dossie) != 0"}
+  
+        <br><br>
+        <div class="table-responsive">
+          <table class="table table-hover table-sm  table-bordered">
+            <thead class="table table-dark">
+              <tr style="font-size: 16px; font-weight: bold; ">
+  
+  
+                <th>
+                  <center>Nome do Arquivo<b>
+                </th>
+                <th>
+                  <center>Inclusão
+                </th>
+                <th>
+                  <center>Usuário
+                </th>
+  
+                <th>
+                  <center>Ano de referência
+                </th>
+                <th>
+                  <center>Visualizar/Baixar Arquivo
+                </th>
+                <th>
+                  <center>Excluir
+                </th>
+  
+  
+  
+  
+              </tr>
+            </thead>
+            <tbody>
+              {loop="$arquivo"}
+              <tr style="font-size: 15px;font-weight: normal;">
+  
+                <td>
+                  <center>{$value.arquivo_dossie}
+                </td>
+                <td>
+                  <center>{function="formatDateHoras($value.dt_registro_arquivo_dossie)"}
+                </td>
+  
+                <td>
+                  <center>{$value.nome_user}
+                </td>
+                <td>
+                  <center>{$value.ano_arquivo}
+                </td>
+                <td>
+                  <center> <a class="btn btn-warning btn-sm " href="{$value.arquivo}" target="_blank"><i
+                        class="far fa-file-alt"></i><b> Visualizar/Download</b></a>
+                </td>
+  
+                <td>
+                  <center>
+                    <button
+                      onclick="deletar('{$value.id_arquivo_dossie}','{$value.arquivo_dossie}','/admin/dossiers-arquivo/delete/{$value.id_arquivo_dossie}','Excluir Arquivo')"
+                      class="btn btn-danger btn-sm">
+                      <i class="fas fa-trash-alt"></i>
+                      <b></b></button>
+                </td>
+  
+                {/loop}
+  
+            </tbody>
+  
+          </table><br>
+  
+        </div>
+  
+        {/if}
+  
+        <hr class="my-4" />
+  
+        <a href="/admin/todos-dossiers-temporarios" class="btn btn-info btn-xs"><i
+            class="fas fa-chevron-circle-left"></i><b>
+            Voltar</b></a>
+  
+  
+      </div>
+    </div>
+  </div>
+  
+  <!-- Modal arquivo -->
+  <div class="modal fade" id="arquivoModal" tabindex="-1" role="dialog" aria-labelledby="arquivoModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="imageModal">Anexar Arquivo</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form class="form-group" action="/admin/dossie/anexar-arquivo/{$value.id_dossie}" method="post"
+            enctype="multipart/form-data"><br>
+  
+            <input class="form-control py-1" value="{$value.id_dossie}" name="id_dossie" type="hidden">
+            <input class="form-control py-1" value="{$usuario.id_usuario}" name="id_usuario" type="hidden">
+  
+            <div class="form-group"><label class="small mb-1"><b style="font-size:17px;color: #585858">Ano de
+                  Referência</b></label>
+              <select class="form-control py-1" name="ano_arquivo" id="ano_arquivo">
+                <option value="2023">2023</option>
+                <option value="2024">2024</option>
+                <option value="2025">2025</option>
+                <option value="2026">2026</option>
+              </select>
+  
+  
+              <div class="form-group"><label class="small mb-1"><b style="font-size:17px;color: #585858">Anexe o dossiê
+                    escaneado </b></label>
+                <input id="addArquivoProfile" class="form-control py-1" type="file" id="arquivo_documento"
+                  name="arquivo_dossie[]" multiple="multiple" required />
+              </div>
+  
+              <input class="btn btn-warning btn btn-block" type="submit" value="Anexar">
+  
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  </div>

@@ -1,0 +1,163 @@
+<?php if(!class_exists('Rain\Tpl')){exit;}?><div class="content">
+
+    <div class="content-inside">
+
+        <div class="my-4">
+            <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a style="background-color: #2E9AFE;color: white" class="nav-link active" id="home-tab"
+                        data-toggle="tab" role="tab" aria-controls="home" aria-selected="false"><b>Cadastrar Unidade
+                            Escolar / CRE</b></a>
+                </li>
+            </ul>
+            <?php if( $unidadeOpenMsg!= '' ){ ?>
+            <div class="alert alert-success">
+                <b><?php echo $unidadeOpenMsg; ?></b>
+            </div>
+            <?php } ?>
+
+            <?php if( $errorRegister != '' ){ ?>
+            <div class="alert alert-danger">
+                <b><?php echo $errorRegister; ?></b>
+            </div>
+            <?php } ?>
+
+            <div class="row mt-5 align-items-center">
+                <div class="col-md-7 text-center mb-5">
+                    <div class="avatar avatar-xl">
+                        <div id="map" style="z-index: 0;"></div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div>
+
+                    </div>
+                    <div class="row mb-7">
+                        <div class="col-md-10">
+                            <p class="text-muted">
+
+                            <form class="form-group" action="/usuario/cadastrar-unidade/registro" method="post"
+                                enctype="multipart/form-data"><br>
+
+                                <div class="form-group"><label class="small mb-1"><b
+                                            style="font-size:20px;color: #585858">Nome da UE ou UA</b></label>
+                                    <input class="form-control py-1" placeholder="Preencha o nome da Unidade Escolar ou CRE"
+                                        type="text" name="nome" required />
+                                </div>
+
+                                 <div class="form-group"><label class="small mb-1"><b
+                                            style="font-size:20px;color: #585858">Sigla</b></label>
+                                    <input class="form-control py-1" placeholder="Preencha a sigla"
+                                        type="text" name="sigla"  />
+                                </div>
+
+                               <div class="form-group"><label class="small mb-1"><b
+                                            style="font-size:20px;color: #585858">Local</b></label>
+                                    <input class="form-control py-1" placeholder="Preencha o Endereço"
+                                        type="text" name="localidade"  />
+                                </div>
+
+                                 <div class="form-group"><label class="small mb-1"><b
+                                            style="font-size:20px;color: #585858">Telefone</b></label>
+                                    <input class="form-control py-1" placeholder="Preencha o Telefone"
+                                        type="text" name="telefone" />
+                                 </div>
+
+                                <!-- <div class="form-group"><label class="small mb-1"><b
+                                    style="font-size:20px;color: #585858">Etapa</b></label>
+                                <select class="form-select form-control py-1" name="etapa" >
+                                    <option value=""></option>
+                                    <option value="Educação Infantil">Educação Infantil</option>
+                                    <option value="Educação Infantil  e Ensino Funtamental">Educação Infantil  e Ensino Funtamental</option>
+                                    <option value="Ensino Fundamental">Ensino Fundamental</option>
+                                    <option value="Ensino Fundamental e Ensino Médio">Ensino Fundamental e Ensino Médio</option>
+                                    <option value="Ensino Médio">Ensino Médio</option>
+                                  </select>
+                                </div> -->
+
+                                 <div class="form-group"><label class="small mb-1"><b
+                                    style="font-size:20px;color: #585858">Unidade</b></label>
+                                <select class="form-select form-control py-1" name="unidade" >
+                                    <option value="Unidade Escolar">Unidade Escolar</option>
+                                    <option value="Unidade Administrativa (CRE)">Unidade Administrativa (CRE)</option>
+                                  </select>
+                                </div> 
+
+                               
+
+
+                                <div class="form-group"><label class="small mb-1"><b b
+                                            style="font-size:20px;color: #585858">Fotos</b></label>
+                                    <input id="addPhoto" class="form-control py-1" type="file" id="" name="nome_foto[]"
+                                        multiple="multiple" />
+                                </div>
+
+                                <input class="form-control py-1" value="<?php echo $usuario["id_usuario"]; ?>" name="id_usuario"
+                                    type="hidden">
+
+
+                                <input class="form-control py-1" id="lat" type="hidden" name="lat">
+
+
+                                <input class="form-control py-1" id="lng" type="hidden" name="lng">
+
+
+                                <center><input style="width: 100%;" class="btn btn-primary btn " type="submit"
+                                        value="Cadastrar"></center>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            <hr class="my-4" />
+            </form>
+            <a href="/usuario/unidades/localidades" class="btn btn-info btn-xs"><i class="fas fa-chevron-circle-left"></i><b>
+                Voltar</b></a>
+        </div>
+        
+    </div>
+    
+</div>
+</div>
+</div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+
+
+<script>
+    var tileLayer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '&copy; ... SS - DF'
+  });
+  
+  var map = new L.Map('map', {
+    'center': [-15.899593349509573,-47.77730941772461],
+    'zoom': 13,
+    'layers': [tileLayer]
+  });
+  
+    var muxiIconProperties = {
+        iconUrl: "/res/map/unidade.png"
+      , iconSize: [44, 59]
+      };
+  
+      var muxiIcon = L.icon(muxiIconProperties);
+  
+  var marker = L.marker([-15.899593349509573,-47.77730941772461],{
+    draggable: true,
+    icon: muxiIcon
+  }).addTo(map);
+  
+  marker.on('dragend', function (e) {
+    document.getElementById('lat').value = marker.getLatLng().lat;
+    document.getElementById('lng').value = marker.getLatLng().lng;
+  });
+  </script>

@@ -1,0 +1,262 @@
+<div class="content">
+    <div class="content-inside">
+        <div class="my-4">
+            <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a style="background-color: #2E9AFE;color: white" class="nav-link active" id="home-tab"
+                        data-toggle="tab" role="tab" aria-controls="home" aria-selected="false"><b>Alterar REPAG</b></a>
+                </li>
+            </ul>
+
+           
+
+            <form class="form-group" name="form_alterar_repag"
+                action="/admin/alterar-repag-transporte-efetivo-enviar/{$value.id_repag_efetivo}" method="post">
+
+                <!-- TABELA REPAGS-->
+
+                {if="$profileMsg != ''"}
+                <div class="alert alert-success">
+                  <b>{$profileMsg}</b>
+                </div>
+                {/if}
+
+                <table class="table table-hover table-bordered">
+                    <thead class="table table-dark">
+
+                        <th>
+                            <center>Folha Frequência
+                        </th>
+                        <th colspan="2">
+                            <center>Itinerário
+                        </th>
+                        <th>
+                            <center>Dias Trabalhados
+                        </th>
+
+                        <th>
+                            <center>Valor Recebido
+                        </th>
+
+                        <th>
+                            <center>Vencimento
+                        </th>
+
+                    </thead>
+
+                    <td>
+                        <select class="form-control py-1" id="frequencia" name="frequencia" required>
+                            <option value="{$value.frequencia}">{$value.frequencia}</option>
+                            <option value="1-Janeiro">1-Janeiro</option>
+                            <option value="2-Fevereiro">2-Fevereiro</option>
+                            <option value="3-Março">3-Março</option>
+                            <option value="4-Abril">4-Abril</option>
+                            <option value="5-Maio">5-Maio</option>
+                            <option value="6-Junho">6-Junho</option>
+                            <option value="7-Julho">7-Julho</option>
+                            <option value="8-Agosto">8-Agosto</option>
+                            <option value="9-Setembro">9-Setembro</option>
+                            <option value="10-Outubro">10-Outubro</option>
+                            <option value="11-Novembro">11-Novembro</option>
+                            <option value="12-Dezembro">12-Dezembro</option>
+                  
+
+                        </select>
+                    </td>
+                    <td colspan="2">
+                        <center>{$value.nome_itinerario}
+                            <input value="{$value.valor_total}" name="itinerarios" id="itinerarios_a" type="hidden"
+                                class="form-control py-1" disabled>
+                    </td>
+                    <td>
+                        <input value="{$value.dias}" min="0" max="31" name="dias" id="dias_a" type="number"
+                            class="form-control py-1">
+                    </td>
+
+                    <td>
+
+                        <input value="{$value.valor_recebido}" min="0" max="10000" step=".01" type="number"
+                            name="valor_recebido" id="vr_recebido_a" class="form-control py-1">
+                    </td>
+
+                    <td>
+                        <input value="{$value.vencimento}" min="0" max="10000" step=".01" type="number"
+                            name="vencimento" id="vencimento_a" class="form-control py-1">
+                    </td>
+                    <thead class="table table-dark">
+                        <th colspan="8">
+                            <center>Valores
+                        </th>
+                    </thead>
+                    <thead style="background-color:#D3D3D3">
+
+
+
+                        <th colspan="2">
+                            <center><button type="button" class="btn btn-secondary  btn-sm" disabled>
+                                    <b style="color: black;">Jus</b>
+                                </button>
+                        </th>
+
+                        <th>
+                            <center><button type="button" class="btn btn-secondary  btn-sm" disabled>
+                                    <b style="color: black;">Recebeu</b>
+                                </button>
+                        </th>
+
+                        <th>
+                            <center><button type="button" class="btn btn-secondary  btn-sm" disabled>
+                                    <b style="color: black;">Custeio</b>
+                                </button>
+                        </th>
+
+                        <th>
+                            <center><button type="button" class="btn btn-primary  btn-sm" disabled>
+                                    <b style="color: black;">Receber</b>
+                                </button>
+                        </th>
+
+                        <th>
+                            <center><button type="button" class="btn btn-danger  btn-sm" disabled>
+                                    <b style="color: black;">Devolver</b>
+                                </button>
+                        </th>
+
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr>
+                            <td colspan="2">
+                                <span id="jus_a"></span><input type="hidden" id="jus_beneficio_a" name="jus" value="">
+                            </td>
+
+
+
+                            <td>
+                                <span id="valorRecebido_a"></span> <input type="hidden" id="vr_beneficio_a"
+                                    name="valor_recebido" value="">
+                            </td>
+
+                            <td>
+                                <span id="custeio_a"></span><input type="hidden" id="custeio_beneficio_a" name="custeio"
+                                    value="">
+                            </td>
+
+                            <td>
+                                <b><span id="receber_a"></b></span><input type="hidden" id="receber_beneficio_a"
+                                    name="receber" value="">
+                            </td>
+
+                            <td>
+                                <b style="color: red;"><span id="devolver_a"></b></span><input type="hidden" id="devolver_beneficio_a"
+                                    name="devolver" value="">
+                            </td>
+
+
+                        </tr>
+
+
+
+
+                    </tbody>
+                </table>
+
+                <button type="button" onclick="alterarRepag()" class="btn btn-primary">Calcular</button>
+                <button type="button" onclick="limparDados_alterar() " class="btn btn-warning">Limpar Dados</button>
+                <input  class="btn btn-success" type="submit" value="Alterar">
+
+            </form>
+
+            <hr class="my-4" />
+
+            <br><br><a href="/admin/transporte-efetivo-visualizar/{$value.id_beneficio_efetivo}" class="btn btn-info btn-xs"><i
+                class="fas fa-chevron-circle-left"></i><b>
+                Voltar</b></a>
+
+
+        </div>
+    </div>
+</div>
+
+
+<script src="/res/user/js/functions.js"></script>
+
+<script type="text/javascript">
+
+    function alterarRepag() {
+        let dias = document.form_alterar_repag.dias_a.value;
+        let valor_itinerario = document.form_alterar_repag.itinerarios_a.value;
+        let jus = dias * valor_itinerario;
+        let valor_recebido = document.form_alterar_repag.vr_recebido_a.value;
+        let vencimento = document.form_alterar_repag.vencimento_a.value;
+        let custeio = vencimento * 0.06;
+        let receber = jus.toFixed(2) - valor_recebido - custeio;
+        let devolver = valor_recebido - jus.toFixed(2) ;
+
+
+        document.getElementById('jus_a').innerText = jus.toFixed(2).replace(".", ",");
+        document.getElementById('jus_beneficio_a').value = jus.toFixed(2);
+
+        document.getElementById('valorRecebido_a').innerText = valor_recebido.replace(".", ",");
+        if (valor_recebido > 0) {
+            document.getElementById('vr_beneficio_a').value = valor_recebido.replace(".", ",");
+        }
+
+        document.getElementById('custeio_a').innerText = custeio.toFixed(2).replace(".", ",");
+        document.getElementById('custeio_beneficio_a').value = custeio.toFixed(2);
+
+
+
+
+        if (jus > valor_recebido) {
+            document.getElementById('receber_a').innerText = receber.toFixed(2).replace(".", ",");
+            document.getElementById('receber_beneficio_a').value = receber.toFixed(2);
+            document.getElementById('devolver_beneficio_a').value = 0;
+            document.getElementById('devolver_a').innerText = 0;
+            document.getElementById('vr_beneficio_a').value = 0;
+        }
+        if (jus < valor_recebido || receber < 0) {
+            document.getElementById('devolver_a').innerText = devolver.toFixed(2).replace(".", ",");
+            document.getElementById('receber_a').innerText = 0;
+            document.getElementById('devolver_beneficio_a').value = devolver.toFixed(2);
+            document.getElementById('receber_beneficio_a').value = 0;
+           
+        }
+        if (jus > valor_recebido && custeio > jus) {
+            document.getElementById('receber_a').innerText = "0,00"
+            document.getElementById('receber_beneficio_a').value = 0;
+            document.getElementById('devolver_beneficio_a').value = 0;
+            document.getElementById('devolver_a').innerText = 0;
+        }
+
+    }
+
+
+    function limparDados_alterar() {
+
+        document.getElementById('jus_a').innerText = "";
+        document.getElementById('valorRecebido_a').innerText = "";
+        document.getElementById('custeio_a').innerText = "";
+        document.getElementById('receber_a').innerText = "";
+        document.getElementById('devolver_a').innerText = "";
+        document.form_alterar_repag.dias.value = "";
+        document.form_alterar_repag.itinerarios.value = "";
+        document.form_alterar_repag.vr_recebido_a.value = "";
+        document.form_alterar_repag.vencimento.value = "";
+        document.form_alterar_repag.frequencia.value = "";
+    }
+
+
+    function atualizar() {
+        location.reload()
+    }
+
+    window.onload = function() {
+  
+        this.alterarRepag()
+        
+    };
+</script>

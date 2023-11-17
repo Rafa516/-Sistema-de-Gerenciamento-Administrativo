@@ -1,0 +1,882 @@
+<div class="content">
+  <div class="content-inside">
+    <div class="my-4">
+      <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+        <li class="nav-item">
+          <a style="background-color:#2E9AFE;color: white" class="nav-link active" id="home-tab" data-toggle="tab"
+            role="tab" aria-controls="home" aria-selected="false"><b>Painel de
+              Dados</b></a>
+        </li>
+      </ul>
+      <center><img src="../res/user/img/logo.png" class="logo" alt=""></center>
+
+      <div class="subTitulo"><p style="font-size: 20px;color: #585858;" class="small mb-1"><b>UNIDADES ESCOLARES</b></p></div>
+      <hr>
+      
+   
+      <center><!-- Button trigger modal -->
+
+        <button  type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#modalEducacaoInfantil" id="buttonsPainel">
+          Educação Infantil
+        </button>
+      
+
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-outline-danger" data-toggle="modal"
+          data-target="#modalInfantilFundamental"  id="buttonsPainel">
+          Educação Infantil e Ensino Fundamental
+        </button>
+
+
+
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modalFundamental"  id="buttonsPainel">
+          Ensino Fundamental
+        </button>
+
+        
+
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#modalFundamentalMedio"  id="buttonsPainel">
+          Ensino Fundamental e Médio
+        </button>
+
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-outline-secondary" data-toggle="modal"
+          data-target="#modalMedio"  id="buttonsPainel">
+          Ensino Médio
+        </button>
+      
+      </center>
+      
+      <center><canvas id="unidades" style="width:100%;max-width:600px;height:400px"></canvas><br><br>
+
+          <center><!-- Button trigger modal -->
+        <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#modalDiretores"  id="buttonsPainel">
+          Diretores
+        </button>
+
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-outline-danger" data-toggle="modal"
+          data-target="#modalViceDiretores"  id="buttonsPainel">
+          Vice-diretores
+        </button>
+
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modalSupervisores"  id="buttonsPainel">
+          Supervisores
+        </button>
+
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#modalChefeSecretaria"  id="buttonsPainel">
+          Chefe de Secretaria
+        </button>
+
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-outline-secondary" data-toggle="modal"
+          data-target="#modalCoordenadorPedagogico"  id="buttonsPainel">
+          Coordenadores Pedágogicos
+        </button>
+      </center>
+
+      
+
+        <canvas id="unidadesGestores" style="width:100%;max-width:600px;height:400px"></canvas><br><br>
+
+        <canvas id="unidadesTurmas" style="width:100%;max-width:100%"></canvas>
+      </center><br>
+
+
+    <div class="subTitulo">
+      <p style="font-size: 20px;color: #585858;" class="small mb-1"><b>ITINERÁRIOS</b></p>
+      <hr>
+    </div>
+
+      <canvas id="itinerarios" style="width:100%"></canvas>
+
+
+
+
+      <hr class="my-4" />
+
+
+      <!-- MODAL EDUCAÇÃO INFANTIL -->
+      <div class="modal fade" id="modalEducacaoInfantil" tabindex="-1" role="dialog"
+        aria-labelledby="modalEducacaoInfantilTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">EDUCAÇÃO INFANTIL - {function="totalInfantil()"}</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+
+              <table class="table table-hover table-bordered">
+                <thead class="table table-dark">
+                  <tr>
+                    <th>
+                      <center>Unidade Escolar
+                    </th>
+                    <th>
+                      <center>Informações
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {loop="$educacaoInfantil"}
+                  <tr>
+
+                    <td>
+                      <center> {$value.sigla}
+
+                    </td>
+
+                    <td>
+                      <center><a href="/usuario/unidade/informacoes/{$value.id_unidade}" class="btn btn-primary btn-sm ">
+                    <i class="fas fa-eye" aria-hidden="true"></i>
+                    <b> Verificar</b></a>
+
+                    </td>
+
+                  </tr>
+                  {/loop}
+                </tbody>
+              </table>
+
+              <div class="modal-footer">
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MODAL EDUCAÇÃO INFANTIL E FUNDAMENTAL -->
+
+      <div class="modal fade" id="modalInfantilFundamental" tabindex="-1" role="dialog"
+        aria-labelledby="modalInfantilFundamentalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">EDUCAÇÃO INFANTIL E ENSINO FUNDAMENTAL -
+                {function="totalInfantilFundamental()"}</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+
+              <table class="table table-hover table-bordered">
+                <thead class="table table-dark">
+                  <tr>
+                    <th>
+                      <center>Unidade Escolar
+                    </th>
+                    <th>
+                      <center>Informações
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {loop="$educacaoInfantilFundamental"}
+                  <tr>
+
+                    <td>
+                      <center> {$value.sigla}
+
+                    </td>
+
+                    <td>
+                      <center><a href="/usuario/unidade/informacoes/{$value.id_unidade}" class="btn btn-primary btn-sm ">
+                    <i class="fas fa-eye" aria-hidden="true"></i>
+                    <b> Verificar</b></a>
+
+                    </td>
+
+                  </tr>
+                  {/loop}
+                </tbody>
+              </table>
+
+              <div class="modal-footer">
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+       <!-- MODAL FUNDAMENTAL -->
+
+       <div class="modal fade" id="modalFundamental" tabindex="-1" role="dialog"
+       aria-labelledby="modalInfantilFundamentalTitle" aria-hidden="true">
+       <div class="modal-dialog modal-dialog-centered" role="document">
+         <div class="modal-content">
+           <div class="modal-header">
+             <h5 class="modal-title" id="exampleModalLongTitle">ENSINO FUNDAMENTAL -
+               {function="totalFundamental()"}</h5>
+             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+             </button>
+           </div>
+           <div class="modal-body">
+
+             <table class="table table-hover table-bordered">
+               <thead class="table table-dark">
+                 <tr>
+                   <th>
+                     <center>Unidade Escolar
+                   </th>
+                   <th>
+                     <center>Informações
+                   </th>
+                 </tr>
+               </thead>
+               <tbody>
+                 {loop="$educacaoFundamental"}
+                 <tr>
+
+                   <td>
+                     <center> {$value.sigla}
+
+                   </td>
+
+                   <td>
+                     <center><a href="/usuario/unidade/informacoes/{$value.id_unidade}" class="btn btn-primary btn-sm ">
+                    <i class="fas fa-eye" aria-hidden="true"></i>
+                    <b> Verificar</b></a>
+
+                   </td>
+
+                 </tr>
+                 {/loop}
+               </tbody>
+             </table>
+
+             <div class="modal-footer">
+
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+
+      <!-- MODAL FUNDAMENTAL E MEDIO -->
+
+      <div class="modal fade" id="modalFundamentalMedio" tabindex="-1" role="dialog"
+      aria-labelledby="modalFundamentalMedioTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">ENSINO FUNDAMENTAL E MÉDIO -
+              {function="totalFundamentalMedio()"}</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+
+            <table class="table table-hover table-bordered">
+              <thead class="table table-dark">
+                <tr>
+                  <th>
+                    <center>Unidade Escolar
+                  </th>
+                  <th>
+                    <center>Informações
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {loop="$educacaoFundamentalMedio"}
+                <tr>
+
+                  <td>
+                    <center> {$value.sigla}
+
+                  </td>
+
+                  <td>
+                    <center><a href="/usuario/unidade/informacoes/{$value.id_unidade}" class="btn btn-primary btn-sm ">
+                    <i class="fas fa-eye" aria-hidden="true"></i>
+                    <b> Verificar</b></a>
+
+                  </td>
+
+                </tr>
+                {/loop}
+              </tbody>
+            </table>
+
+            <div class="modal-footer">
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL  MEDIO -->
+
+      <div class="modal fade" id="modalMedio" tabindex="-1" role="dialog"
+      aria-labelledby="modalMedioTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">ENSINO MÉDIO -
+              {function="totalMedio()"}</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+
+            <table class="table table-hover table-bordered">
+              <thead class="table table-dark">
+                <tr>
+                  <th>
+                    <center>Unidade Escolar
+                  </th>
+                  <th>
+                    <center>Informações
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {loop="$educacaoMedio"}
+                <tr>
+
+                  <td>
+                    <center> {$value.sigla}
+
+                  </td>
+
+                  <td>
+                    <center><a href="/usuario/unidade/informacoes/{$value.id_unidade}" class="btn btn-primary btn-sm ">
+                    <i class="fas fa-eye" aria-hidden="true"></i>
+                    <b> Verificar</b></a>
+
+                  </td>
+
+                </tr>
+                {/loop}
+              </tbody>
+            </table>
+
+            <div class="modal-footer">
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+     <!-- MODAL DIRETORES -->
+      <div class="modal fade" id="modalDiretores" tabindex="-1" role="dialog"
+        aria-labelledby="modalDiretores" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">DIRETORES(AS) - {function="totalDiretores()"}</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+
+              <table class="table table-hover table-bordered">
+                <thead class="table table-dark">
+                  <tr>
+                    <th>
+                      <center>Servidores(as)
+                    </th>
+                    <th>
+                      <center>Unidade Escolar
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {loop="$diretores"}
+                  <tr>
+
+                    <td>
+                      <center> {$value.diretor}
+
+                    </td>
+
+                    <td>
+                      <center>{$value.sigla}
+
+                    </td>
+
+                  </tr>
+                  {/loop}
+                </tbody>
+              </table>
+
+              <div class="modal-footer">
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MODAL VICE DIRETORES -->
+      <div class="modal fade" id="modalViceDiretores" tabindex="-1" role="dialog"
+        aria-labelledby="modalViceDiretores" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">VICE DIRETORES(AS) - {function="totalViceDiretores()"}</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+
+              <table class="table table-hover table-bordered">
+                <thead class="table table-dark">
+                  <tr>
+                    <th>
+                      <center>Servidores(as)
+                    </th>
+                    <th>
+                      <center>Unidade Escolar
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {loop="$viceDiretores"}
+                  <tr>
+
+                    <td>
+                      <center> {$value.vice_diretor}
+
+                    </td>
+
+                    <td>
+                      <center>{$value.sigla}
+
+                    </td>
+
+                  </tr>
+                  {/loop}
+                </tbody>
+              </table>
+
+              <div class="modal-footer">
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+       <!-- MODAL SUPERVISORES -->
+      <div class="modal fade" id="modalSupervisores" tabindex="-1" role="dialog"
+        aria-labelledby="modalViceDiretores" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">SUPERVISORES(AS) - {function="totalSupervisores()"}</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+
+              <table class="table table-hover table-bordered">
+                <thead class="table table-dark">
+                  <tr>
+                    <th>
+                      <center>Servidores(as)
+                    </th>
+                    <th>
+                      <center>Unidade Escolar
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {loop="$supervisores"}
+                  <tr>
+
+                    <td>
+                      <center> {$value.supervisor}
+
+                    </td>
+
+                    <td>
+                      <center>{$value.sigla}
+
+                    </td>
+
+                  </tr>
+                  {/loop}
+                </tbody>
+              </table>
+
+              <div class="modal-footer">
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+       <!-- MODAL SUPERVISORES -->
+      <div class="modal fade" id="modalSupervisores" tabindex="-1" role="dialog"
+        aria-labelledby="modalViceDiretores" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">SUPERVISORES(AS) - {function="totalSupervisores()"}</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+
+              <table class="table table-hover table-bordered">
+                <thead class="table table-dark">
+                  <tr>
+                    <th>
+                      <center>Servidores(as)
+                    </th>
+                    <th>
+                      <center>Unidade Escolar
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {loop="$supervisores"}
+                  <tr>
+
+                    <td>
+                      <center> {$value.supervisor}
+
+                    </td>
+
+                    <td>
+                      <center>{$value.sigla}
+
+                    </td>
+
+                  </tr>
+                  {/loop}
+                </tbody>
+              </table>
+
+              <div class="modal-footer">
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+         <!-- MODAL CHEFE SECRETARIA -->
+      <div class="modal fade" id="modalChefeSecretaria" tabindex="-1" role="dialog"
+        aria-labelledby="modalChefeSecretariaTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">CHEFE SECRETARIA - {function="totalChefeSecretaria()"}</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+
+              <table class="table table-hover table-bordered">
+                <thead class="table table-dark">
+                  <tr>
+                    <th>
+                      <center>Servidores(as)
+                    </th>
+                    <th>
+                      <center>Unidade Escolar
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {loop="$chefeSecretaria"}
+                  <tr>
+
+                    <td>
+                      <center> {$value.chefe_secretaria}
+
+                    </td>
+
+                    <td>
+                      <center>{$value.sigla}
+
+                    </td>
+
+                  </tr>
+                  {/loop}
+                </tbody>
+              </table>
+
+              <div class="modal-footer">
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+       <!-- MODAL COORDENADORES PEDAGOGICOS -->
+      <div class="modal fade" id="modalCoordenadorPedagogico" tabindex="-1" role="dialog"
+        aria-labelledby="modalViceDiretores" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">COORDENADORES(AS) - {function="totalCoordenadores()"}</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+
+              <table class="table table-hover table-bordered">
+                <thead class="table table-dark">
+                  <tr>
+                    <th>
+                      <center>Servidores(as)
+                    </th>
+                    <th>
+                      <center>Unidade Escolar
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {loop="$coordenadoresPedagogicos"}
+                  <tr>
+
+                    <td>
+                      <center> {$value.coordenador_pedagogico}
+
+                    </td>
+
+                    <td>
+                      <center>{$value.sigla}
+
+                    </td>
+
+                  </tr>
+                  {/loop}
+                </tbody>
+              </table>
+
+              <div class="modal-footer">
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+     
+
+
+
+    </div>
+  </div>
+</div>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+
+<script>
+  //GRÁFICO ITINERARIOS
+
+  var xValues = [
+    {loop="$itinerarios"}"{$value.nome_itinerario}", {/loop}
+    ];
+
+  var yValues = [
+    {loop="$itinerarios"}{$value.valor_total}, {/loop}
+    ];
+
+
+
+
+  var barColors = "rgba(255,0,0,0.6)";
+
+  new Chart("itinerarios", {
+    type: "horizontalBar",
+
+    data: {
+
+      labels: xValues,
+      datasets: [{
+        backgroundColor: barColors,
+        data: yValues
+      }]
+    },
+    options: {
+      legend: { display: false },
+      title: {
+        display: true,
+        text: "Itinerários X Valores"
+      },
+      scales: {
+        xAxes: [{
+          display: true,
+          ticks: {
+            beginAtZero: true,
+            min: 0,
+            stepSize: 10
+          },
+          scaleLabel: {
+            display: true,
+            labelString: "Valor total diário em R$",
+            fontColor: "black"
+          }
+        }],
+        yAxes: [{
+          gridLines: {
+
+            borderDash: [2, 5],
+          },
+          scaleLabel: {
+            display: true,
+            labelString: "Itinerários",
+            fontColor: "black"
+          }
+        }]
+
+      }
+    }
+
+
+  });
+</script>
+
+<script>
+  //GRÁFICO UNIDADES
+  var xValues = ["Educação Infantil", "Educação Infantil  e Ensino Fundamental", "Ensino Fundamental", "Ensino Fundamental e Médio", "Ensino Médio"];
+  var yValues = ['{function="totalInfantil()"}', '{function="totalInfantilFundamental()"}', '{function="totalFundamental()"}',
+    '{function="totalFundamentalMedio()"}', '{function="totalMedio()"}'];
+  var barColors = ["green", "red", "blue", "orange", "gray"];
+
+  new Chart("unidades", {
+    type: "doughnut",
+    data: {
+      labels: xValues,
+      datasets: [{
+        backgroundColor: barColors,
+        data: yValues
+      }]
+    },
+    options: {
+      legend: { display: true },
+      title: {
+        display: true,
+        text: "Totais de etapas de ensino"
+      },
+
+    }
+
+  });
+</script>
+
+<script>
+  //GRÁFICO UNIDADES TURMAS
+
+
+  var xValues = [
+    {loop="$unidades"}"{$value.sigla}", {/loop}
+    ];
+
+  var yValues = [
+    {loop="$unidades"}{$value.qtd_turmas}, {/loop}
+    ];
+
+
+
+
+  var barColors = "rgba(39,88,245,0.6)";
+
+  new Chart("unidadesTurmas", {
+    type: "horizontalBar",
+
+    data: {
+
+      labels: xValues,
+      datasets: [{
+        backgroundColor: barColors,
+        data: yValues
+      }]
+    },
+    options: {
+      legend: { display: false },
+      title: {
+        display: true,
+        text: "Unidades Escolares x Turmas"
+      },
+      scales: {
+        xAxes: [{
+          display: true,
+          ticks: {
+            beginAtZero: true,
+            min: 0,
+            stepSize: 10
+          },
+          scaleLabel: {
+            display: true,
+            labelString: "Total de Turmas",
+            fontColor: "black"
+          }
+        }],
+        yAxes: [{
+          gridLines: {
+
+            borderDash: [2, 5],
+          },
+          scaleLabel: {
+            display: true,
+            labelString: "Unidades Escolares",
+            fontColor: "black"
+          }
+        }]
+
+      }
+    }
+
+
+  });
+</script>
+
+<script>
+  //GRÁFICO UNIDADES GESTORES E COORDENARDORES
+  var xValues = ["Diretores", "Vice-Diretores", "Supervisores", "Chefe de Secretaria", "Coordenadores Pedagógicos"];
+  var yValues = ['{function="totalDiretores()"}', '{function="totalViceDiretores()"}', '{function="totalSupervisores()"}', '{function="totalChefeSecretaria()"}', '{function="totalCoordenadores()"}'];
+  var barColors = ["green", "red", "blue", "orange", "gray"];
+
+  new Chart("unidadesGestores", {
+    type: "pie",
+    data: {
+      labels: xValues,
+      datasets: [{
+        backgroundColor: barColors,
+        data: yValues
+      }]
+    },
+    options: {
+      legend: { display: true },
+      title: {
+        display: true,
+        text: "Totais de Gestores e Coordenadores Pedagógicos"
+      },
+
+    }
+
+  });
+</script>

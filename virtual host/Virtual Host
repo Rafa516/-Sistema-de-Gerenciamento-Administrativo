@@ -1,0 +1,19 @@
+//Vá até o arquivo desse caminho "C:\xampp\apache\conf\extra\httpd-vhosts.conf", copie e cole a configuração abaixo nele 
+//Ajuste os privilégios de acesso a sua pasta e reinicie o apache
+
+<VirtualHost *:80>
+    ServerAdmin "seu e-mail'
+    DocumentRoot "caminho da pasta do seu sistema"
+    ServerName sistema-unigep.com.br
+    ErrorLog "logs/dummy-host2.example.com-error.log"
+    CustomLog "logs/dummy-host2.example.com-access.log" common
+    <Directory "caminho da pasta do seu sistema"
+        Require all granted
+
+        RewriteEngine On
+
+        RewriteCond %{REQUEST_FILENAME} !-d
+        RewriteCond %{REQUEST_FILENAME} !-f
+        RewriteRule ^ index.php [QSA,L]
+    </Directory>
+</VirtualHost>

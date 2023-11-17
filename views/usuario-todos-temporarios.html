@@ -1,0 +1,156 @@
+<div class="content">
+  <div class="content-inside">
+    <div class="my-4">
+      <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+        <li class="nav-item">
+          <a style="background-color: #2E9AFE;color: white" class="nav-link active" id="home-tab" data-toggle="tab"
+            role="tab" aria-controls="home" aria-selected="false"><b>Contratos Temporários -
+              {if="$total == 0"}
+              Nenhum Registrado
+              {elseif="$total == 1"}
+              {$total} Registrado
+              {else}
+              {$total} Registrados
+              {/if} </b></a>
+
+        </li>
+
+      </ul>
+
+      <a style="width: 25%;" href="/usuario/registrar-temporarios" class="btn btn-primary btn-sm"><i
+          class="fa fa-plus-circle" aria-hidden="true"></i><b> Cadastrar CT</b></a>
+
+
+
+      {if="$total > 0"}
+      <div class="search" style="float: right">
+        <form action="/usuario/todos-temporarios" method="get">
+          <div class="input-group">
+            <input type="text" name="search" class="form-control" placeholder="Digite sua pesquisa...">
+            <span class="input-group-btn">
+              <button class="btn btn" style="background-color: #2E9AFE;color: white" type="submit" id="search-btn"><i
+                  class="fa fa-search" style="font-size:13px;"> PESQUISAR</i>
+              </button>
+            </span>
+          </div>
+        </form>
+      </div><br><br>
+
+      {if="$profileMsg != ''"}
+      <div class="alert alert-success">
+        <b>{$profileMsg}</b>
+      </div>
+      {/if}
+
+
+      <div class="table-responsive">
+        <table class=" table table-hover table-sm  table-bordered">
+          <thead class="table table-dark">
+            <tr style="font-size: 16px; font-weight: bold; ">
+
+
+              <th>
+                <center>Nome <b>
+              </th>
+
+              <th>
+                <center>Matrícula<b>
+              </th>
+
+              <th>
+                <center>CPF<b>
+              </th>
+
+              <th>
+                <center>Componente<b>
+              </th>
+
+              <th>
+                <center>Ano<b>
+              </th>
+
+              <th>
+                <center>Alterar
+              </th>
+              <th>
+                <center>Excluir
+              </th>
+
+
+            </tr>
+          </thead>
+          <tbody>
+            {loop="$temporarios"}
+            <tr style="font-size: 15px;font-weight: normal;">
+
+              <td>
+                <center>{$value.nome}
+              </td>
+
+              <td>
+                <center>{$value.matricula}
+              </td>
+
+              <td>
+                <center>{$value.cpf}
+              </td>
+
+              <td>
+                <center>{$value.componente}
+              </td>
+
+              <td>
+                <center>{$value.ano}
+              </td>
+
+              <td>
+                <center> <a href="/usuario/temporario/editar/{$value.id_temporario}" class="btn btn-success btn-sm"><i
+                      class="fas fa-pen"></i><b></b></a></center>
+              </td>
+              <td>
+                <center>
+                  <button
+                    onclick="deletar('{$value.id_temporario}','{$value.nome}','/usuario/temporarios/delete/{$value.id_temporario}','Excluir servidor')"
+                    class="btn btn-danger btn-sm">
+                    <i class="fas fa-trash-alt"></i>
+                    <b></b></button>
+              </td>
+
+
+            </tr>
+
+            {/loop}
+
+          </tbody>
+
+        </table><br>
+
+      </div>
+
+
+
+      <center>
+        <div class="box-footer clearfix">
+          <ul class="pagination">
+            {loop="$pages"}
+            {if="$pages == $value.link"}
+            <li> <a class="active" href="{$value.link}">{$value.page}</a></li>
+            {else}
+            <li><a href="{$value.link}">{$value.page}</a></li>
+            {/if}
+            {/loop}
+        </div>
+      </center>
+
+      {/if}
+      <br><br><a href="/usuario/utilidades" class="btn btn-info btn-xs"><i
+          class="fas fa-chevron-circle-left"></i><b>
+          Voltar</b></a>
+
+
+      <hr class="my-4" />
+
+    </div>
+
+  </div>
+</div>
