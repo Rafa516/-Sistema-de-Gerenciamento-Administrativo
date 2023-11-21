@@ -12,8 +12,9 @@
 - **Desenvolvimento**
     O desenvolvimento do projeto é a partir do **PHP Orientado a Objetos**, com auxílio da estrutura **PDO**, para fornecer uma camada de abstração em relação a conexão com o banco de dados. 
     As rotas são definidas pelo Micro Framework **Slim** em uma arquitetura **Model-View-Controller**.
-    Os templates são gerados através da  classe **TPL(Rain TPL)**.
+    Os templates são gerados através da biblioteca PHP **TPL(Rain TPL)**.
     Essa estrutura delimita o front-end do back-end.
+    Para o mapa, foi utilizado a biblioteca JS **Leaflet**.
     O sistema gerenciador de banco de dados relacional usado foi o [MySQL Workbench](https://www.mysql.com/products/workbench/) e [phpMyAdmin](https://www.phpmyadmin.net/), com auxílio do software  [DBeaver](https://dbeaver.io)
 
 ## Configuração habilitada
