@@ -15,6 +15,7 @@
     Os templates são gerados através da biblioteca PHP **TPL(Rain TPL)**.
     Essa estrutura delimita o front-end do back-end.
     Para o mapa, foi utilizado a biblioteca JS **Leaflet**.
+    Para os gráficos, foi utilizado a Biblioteca **Chart.js**.
     O sistema gerenciador de banco de dados relacional usado foi o [MySQL Workbench](https://www.mysql.com/products/workbench/) e [phpMyAdmin](https://www.phpmyadmin.net/), com auxílio do software  [DBeaver](https://dbeaver.io)
 
 ## Configuração habilitada
